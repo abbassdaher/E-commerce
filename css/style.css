@@ -75,3 +75,21 @@ header{
     opacity:0.8
     
 }
+.product-item{
+    size: 60%;
+    display: flex;
+    margin: 10px 0;
+}
+.product-item-img{
+width: 10%;
+}
+.product-item-content{
+    border: 1px solid rgb(201, 195, 195);
+    padding-left: 10px;
+    /* background-color: red; */
+}
+.add-to-cart{
+    display: flex;
+}
+.product-item-title{}
+.product-item-desc{}
