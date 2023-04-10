@@ -25,6 +25,8 @@ if(localStorage.getItem("username")){
 
 // define products
 let productDom = document.querySelector('.products')
+let shopping_basket = document.querySelector('.cart_product div')
+
 let products = [
     {   
         id:1,
@@ -76,10 +78,13 @@ function drawProductsUi(){
         productDom.innerHTML = productsUi
 }
 drawProductsUi();
-
 function addToCart(id){
 // console.log(id)
 products.find((item)=>{
-    if(item.id==id){console.log(item)}
+    if(item.id==id){
+        console.log(item)
+        shopping_basket.innerHTML += `<li>${item.title}</li>`
+
+    }
 })
 }
