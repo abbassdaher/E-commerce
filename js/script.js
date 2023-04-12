@@ -26,8 +26,10 @@ if(localStorage.getItem("username")){
 // define products
 let productDom = document.querySelector('.products')
 let shopping_basket = document.querySelector('.cart_product div')
+let bascket = document.querySelector('.bascket')
 let addToCart_badge =  document.querySelector('.badge')
 var badge = 0
+let cart_product_menu =document.querySelector('.cart_product')
 
 let products = [
     {   
@@ -92,6 +94,16 @@ products.find((item)=>{
         addToCart_badge.style.visibility = "visible"
         addToCart_badge.innerHTML = badge
 
+
     }
 })
+
+}
+// addToCart_badge.style.visibility = "visible"
+bascket.addEventListener('click',showMenu)
+function showMenu(){
+    if(shopping_basket.innerHTML !=""){
+        cart_product_menu.style.visibility = "visible"
+    }
+    
 }

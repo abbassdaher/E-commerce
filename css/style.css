@@ -203,8 +203,5 @@ header {
 
 }
 .cart_product{
-    visibility: visible;
-}
-.bascket:hover .cart_product{
-    visibility:visible ;
+    visibility: hidden;
 }
