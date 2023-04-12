@@ -160,6 +160,7 @@ header {
     margin: 0 5px;
     font-size: 20px;
     position: relative;
+    cursor: pointer;
 }
 
 .badge {
@@ -175,6 +176,7 @@ header {
     color: white;
     text-align: center;
     line-height: 1.5;
+    visibility: hidden;
 
 
 }
@@ -199,4 +201,10 @@ header {
 .cart_product a:hover{
     background-color: green;
 
+}
+.cart_product{
+    visibility: visible;
+}
+.bascket:hover .cart_product{
+    visibility:visible ;
 }

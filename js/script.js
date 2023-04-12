@@ -26,6 +26,8 @@ if(localStorage.getItem("username")){
 // define products
 let productDom = document.querySelector('.products')
 let shopping_basket = document.querySelector('.cart_product div')
+let addToCart_badge =  document.querySelector('.badge')
+var badge = 0
 
 let products = [
     {   
@@ -55,6 +57,7 @@ let products = [
     }
 ];
 function drawProductsUi(){
+    // list of products
     let productsUi = products.map(
         (item)=>{
             return `
@@ -77,13 +80,17 @@ function drawProductsUi(){
         })
         productDom.innerHTML = productsUi
 }
+// list of products
 drawProductsUi();
+// add product to cart
 function addToCart(id){
-// console.log(id)
 products.find((item)=>{
     if(item.id==id){
         console.log(item)
         shopping_basket.innerHTML += `<li>${item.title}</li>`
+        badge+=1
+        addToCart_badge.style.visibility = "visible"
+        addToCart_badge.innerHTML = badge
 
     }
 })
