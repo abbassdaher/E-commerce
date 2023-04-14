@@ -7,8 +7,8 @@ let user_info = document.querySelector("#user_info")
 
 
 
-
-user_info.style.display = "none"
+function ckeckForUser(){
+    user_info.style.display = "none"
 if(localStorage.getItem("username")){
     user_info.style.display = "block"
     username.style.textDecoration = "none"
@@ -21,6 +21,23 @@ if(localStorage.getItem("username")){
         }, 1500);
     })
 }
+}
+// check for user if open printed it on navbar
+ckeckForUser()
+
+// user_info.style.display = "none"
+// if(localStorage.getItem("username")){
+//     user_info.style.display = "block"
+//     username.style.textDecoration = "none"
+//     username.innerHTML = `Welcome ${localStorage.getItem("username")} `
+//     links.style.display = "none"
+//     user_info.style.display = "flex"
+//     log_out.addEventListener("click",function() {
+//         setTimeout(() => {
+//             window.location = "login.html"
+//         }, 1500);
+//     })
+// }
 
 
 // define products
