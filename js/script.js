@@ -1,4 +1,3 @@
-let username = document.querySelector("#username");
 let email = document.querySelector("#email");
 let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
@@ -7,21 +6,7 @@ let user_info = document.querySelector("#user_info")
 
 
 
-function ckeckForUser(){
-    user_info.style.display = "none"
-if(localStorage.getItem("username")){
-    user_info.style.display = "block"
-    username.style.textDecoration = "none"
-    username.innerHTML = `Welcome ${localStorage.getItem("username")} `
-    links.style.display = "none"
-    user_info.style.display = "flex"
-    log_out.addEventListener("click",function() {
-        setTimeout(() => {
-            window.location = "login.html"
-        }, 1500);
-    })
-}
-}
+//call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
 
@@ -103,11 +88,17 @@ function drawProductsUi(){
 drawProductsUi();
 
 let addItem = []
+
 // add product to cart
 function addToCart(id){
+    // products in cart at local storage
+   let productsInCart= localStorage.getItem('productsInCart')
+   
 products.find((item)=>{
-    if(item.id==id){
-        // console.log(item)
+    if(item.id==id  ){
+        console.log('item: '+ item)
+        console.log('productsInCart : ' +productsInCart)
+        // if(item.id !=productsInCart)
         shopping_basket.innerHTML += `<li>${item.title}</li>`
         badge+=1
         addToCart_badge.style.visibility = "visible"
@@ -116,7 +107,7 @@ products.find((item)=>{
         //  convert object to string to set in localstorage
         // JSON.stringify(addItem)
         localStorage.setItem('productsInCart',JSON.stringify(addItem))
-        console.log(addItem)
+        // console.log(addItem)
 
 
     }

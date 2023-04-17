@@ -16,7 +16,7 @@ function drawProductsUi(){
                             <span class="product-item-size">size: ${item.size}</span>
                         </div>
                         <div class="product-item-actions">
-                            <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
+                            <button class="add-to-cart" onclick = "removeFromCart(${item.id})">Remove</button>
                             <i class="fa-sharp fa-regular fa-heart favorite"></i>
                         </div>
                     </div>
@@ -27,20 +27,12 @@ function drawProductsUi(){
         productDom.innerHTML = productsUi
 }
 drawProductsUi()
-function ckeckForUser(){
-    user_info.style.display = "none"
-if(localStorage.getItem("username")){
-    user_info.style.display = "block"
-    username.style.textDecoration = "none"
-    username.innerHTML = `Welcome ${localStorage.getItem("username")} `
-    links.style.display = "none"
-    user_info.style.display = "flex"
-    log_out.addEventListener("click",function() {
-        setTimeout(() => {
-            window.location = "login.html"
-        }, 1500);
-    })
-}
-}
-// check for user if open printed it on navbar
+//function called from user js
 ckeckForUser()
+
+// remove from localstorage
+// function removeFromCart(id){
+// if(products.id==id){
+//     localStorage.re
+// }
+// }
