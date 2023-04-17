@@ -33,33 +33,33 @@ let addToCart_badge =  document.querySelector('.badge')
 var badge = 0
 let cart_product_menu =document.querySelector('.cart_product')
 
-let products = [
-    {   
-        id:1,
-        image:"images/headphone.jpg",
-        title:"hedphone item",
-        size:"large"
+// let products = [
+//     {   
+//         id:1,
+//         image:"images/headphone.jpg",
+//         title:"hedphone item",
+//         size:"large"
 
-    },
-    { 
-        id:2,
-        image:"images/glasses.jpg",
-        title:"glasses item",
-        size:"small"
-    },
-    {   
-        id:3,
-        image:"images/lab.jpg",
-        title:"lap item",
-        size:"large"
-    },
-    {   
-        id:4,
-        image:"images/watch.jpg",
-        title:"lap item",
-        size:"meduim"
-    }
-];
+//     },
+//     { 
+//         id:2,
+//         image:"images/glasses.jpg",
+//         title:"glasses item",
+//         size:"small"
+//     },
+//     {   
+//         id:3,
+//         image:"images/lab.jpg",
+//         title:"lap item",
+//         size:"large"
+//     },
+//     {   
+//         id:4,
+//         image:"images/watch.jpg",
+//         title:"lap item",
+//         size:"meduim"
+//     }
+// ];
 function drawProductsUi(){
     // list of products
     let productsUi = products.map(
