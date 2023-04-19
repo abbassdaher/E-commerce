@@ -3,6 +3,7 @@ let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
 let log_out = document.querySelector("#logout")
 let user_info = document.querySelector("#user_info")
+// let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
 
 
 
@@ -29,41 +30,15 @@ ckeckForUser()
 let productDom = document.querySelector('.products')
 let shopping_basket = document.querySelector('.cart_product div')
 let bascket = document.querySelector('.bascket')
-let addToCart_badge =  document.querySelector('.badge')
-var badge = 0
-let cart_product_menu =document.querySelector('.cart_product')
+let addToCart_badge = document.querySelector('.badge')
+// var badge 
+let badge
+let cart_product_menu = document.querySelector('.cart_product')
 
-// let products = [
-//     {   
-//         id:1,
-//         image:"images/headphone.jpg",
-//         title:"hedphone item",
-//         size:"large"
-
-//     },
-//     { 
-//         id:2,
-//         image:"images/glasses.jpg",
-//         title:"glasses item",
-//         size:"small"
-//     },
-//     {   
-//         id:3,
-//         image:"images/lab.jpg",
-//         title:"lap item",
-//         size:"large"
-//     },
-//     {   
-//         id:4,
-//         image:"images/watch.jpg",
-//         title:"lap item",
-//         size:"meduim"
-//     }
-// ];
-function drawProductsUi(){
+function drawProductsUi() {
     // list of products
     let productsUi = products.map(
-        (item)=>{
+        (item) => {
             return `
             <div class="product-item">
                     <img src="${item.image}" alt="image" class="product-item-img">
@@ -82,48 +57,73 @@ function drawProductsUi(){
                 </div>
             `
         })
-        productDom.innerHTML = productsUi
+    productDom.innerHTML = productsUi
 }
 // list of products
 drawProductsUi();
 
-let addItem = []
+let addItem =[]
+    if (products) {
+        badge = products.length
+        console.log(products)
+        // addToCart_badge.style.visibility = "visible"
+        // addToCart_badge.innerHTML = badge
+        products.map((item) => {
+            // console.log('productsInCart : ' + productsInCart)
+                shopping_basket.innerHTML += `<li>${item.title}</li>`
+                addToCart_badge.style.visibility = "visible"
+                addToCart_badge.innerHTML = badge
+                addItem = [...addItem,item]
+                //  convert object to string to set in localstorage
+                // JSON.stringify(addItem)
+                localStorage.setItem('productsInCart', JSON.stringify(addItem))
+                // console.log(addItem)
+        })
+        
+    } else {
+        badge = 0
+        console.log('badge: ' + badge)
+    }
+
+console.log('badge: ' + badge)
 
 // add product to cart
-function addToCart(id){
+function addToCart(id) {
     // products in cart at local storage
-   let productsInCart= localStorage.getItem('productsInCart')
-   
-products.find((item)=>{
-    if(item.id==id  ){
-        console.log('item: '+ item)
-        console.log('productsInCart : ' +productsInCart)
-        // if(item.id !=productsInCart)
-        shopping_basket.innerHTML += `<li>${item.title}</li>`
-        badge+=1
-        addToCart_badge.style.visibility = "visible"
-        addToCart_badge.innerHTML = badge
-        addItem = [...addItem , item]
-        //  convert object to string to set in localstorage
-        // JSON.stringify(addItem)
-        localStorage.setItem('productsInCart',JSON.stringify(addItem))
-        // console.log(addItem)
+    let productsInCart = localStorage.getItem('productsInCart')
+    console.log('products: ' + products.length)
 
 
-    }
-})
+    //search for product in local storage
+    products.find((item) => {
+        if (item.id == id) {
+            console.log('item: ' + item)
+            console.log('productsInCart : ' + productsInCart)
+            shopping_basket.innerHTML += `<li>${item.title}</li>`
+            badge += 1
+            addToCart_badge.style.visibility = "visible"
+            addToCart_badge.innerHTML = badge
+            addItem = [...addItem,item]
+            //  convert object to string to set in localstorage
+            // JSON.stringify(addItem)
+            localStorage.setItem('productsInCart', JSON.stringify(addItem))
+            // console.log(addItem)
+
+
+        }
+    })
 
 }
 // addToCart_badge.style.visibility = "visible"
-bascket.addEventListener('click',showMenu)
-function showMenu(){
-    if(cart_product_menu.style.visibility == "hidden"){
-        if(shopping_basket.innerHTML !=""){
+bascket.addEventListener('click', showMenu)
+function showMenu() {
+    if (cart_product_menu.style.visibility == "hidden") {
+        if (shopping_basket.innerHTML != "") {
             cart_product_menu.style.visibility = "visible"
         }
-    }else{
+    } else {
         cart_product_menu.style.visibility = "hidden"
 
     }
-    
+
 }

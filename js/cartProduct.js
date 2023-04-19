@@ -16,7 +16,7 @@ function drawProductsUi(){
                             <span class="product-item-size">size: ${item.size}</span>
                         </div>
                         <div class="product-item-actions">
-                            <button class="add-to-cart" onclick = "removeFromCart(${item.id})">Remove</button>
+                            <button class="add-to-cart" onclick = "removeItemFromCart(${item.id})">Remove</button>
                             <i class="fa-sharp fa-regular fa-heart favorite"></i>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ drawProductsUi()
 ckeckForUser()
 
 // remove from localstorage
-// function removeFromCart(id){
+// function removeItemFromCart(id){
 // if(products.id==id){
 //     localStorage.re
 // }
