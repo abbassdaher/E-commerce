@@ -13,6 +13,6 @@ if(localStorage.getItem("username")){
         setTimeout(() => {
             window.location = "login.html"
         }, 1500);
-    })
+    });
 }
 }

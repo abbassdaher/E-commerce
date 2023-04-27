@@ -3,8 +3,8 @@ let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
 let log_out = document.querySelector("#logout")
 let user_info = document.querySelector("#user_info")
-// let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
-
+let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
+let addItem =[]
 
 
 //call function from user.js
@@ -62,13 +62,13 @@ function drawProductsUi() {
 // list of products
 drawProductsUi();
 
-let addItem =[]
-    if (products) {
-        badge = products.length
-        console.log(products)
+// check if products in cart at localstorage 
+    if (productsIncart) {
+        badge = productsIncart.length
+        // console.log(products)
         // addToCart_badge.style.visibility = "visible"
         // addToCart_badge.innerHTML = badge
-        products.map((item) => {
+        productsIncart.map((item) => {
             // console.log('productsInCart : ' + productsInCart)
                 shopping_basket.innerHTML += `<li>${item.title}</li>`
                 addToCart_badge.style.visibility = "visible"
@@ -76,7 +76,7 @@ let addItem =[]
                 addItem = [...addItem,item]
                 //  convert object to string to set in localstorage
                 // JSON.stringify(addItem)
-                localStorage.setItem('productsInCart', JSON.stringify(addItem))
+                // localStorage.setItem('productsInCart', JSON.stringify(addItem))
                 // console.log(addItem)
         })
         

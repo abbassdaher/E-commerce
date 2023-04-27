@@ -141,6 +141,15 @@ header {
     margin-left: auto;
 
 }
+.remove-from-cart{
+    background-color: red;
+    color: white;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+    border: 0;
+    margin-left: auto; 
+}
 
 .product-item-title {
     font-family: 'Oswald', sans-serif;

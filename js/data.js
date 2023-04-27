@@ -21,7 +21,7 @@ let products = [
     {   
         id:4,
         image:"images/watch.jpg",
-        title:"lap item",
+        title:"watch item",
         size:"meduim"
     }
 ];
