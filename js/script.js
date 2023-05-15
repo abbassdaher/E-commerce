@@ -1,32 +1,13 @@
 let email = document.querySelector("#email");
 let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
-let log_out = document.querySelector("#logout")
+
 let user_info = document.querySelector("#user_info")
-let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
-let addItem =[]
+// let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
+let productsInCartObj = JSON.parse(localStorage.getItem('productsInCart'))
+let productsIncart = localStorage.getItem('productsInCart')
+let addItem = []
 
-
-//call function from user.js
-// check for user if open printed it on navbar
-ckeckForUser()
-
-// user_info.style.display = "none"
-// if(localStorage.getItem("username")){
-//     user_info.style.display = "block"
-//     username.style.textDecoration = "none"
-//     username.innerHTML = `Welcome ${localStorage.getItem("username")} `
-//     links.style.display = "none"
-//     user_info.style.display = "flex"
-//     log_out.addEventListener("click",function() {
-//         setTimeout(() => {
-//             window.location = "login.html"
-//         }, 1500);
-//     })
-// }
-
-
-// define products
 let productDom = document.querySelector('.products')
 let shopping_basket = document.querySelector('.cart_product div')
 let bascket = document.querySelector('.bascket')
@@ -35,8 +16,13 @@ let addToCart_badge = document.querySelector('.badge')
 let badge
 let cart_product_menu = document.querySelector('.cart_product')
 
+//call function from user.js
+// check for user if open printed it on navbar
+ckeckForUser()
+
 function drawProductsUi() {
     // list of products
+
     let productsUi = products.map(
         (item) => {
             return `
@@ -63,47 +49,37 @@ function drawProductsUi() {
 drawProductsUi();
 
 // check if products in cart at localstorage 
-    if (productsIncart) {
-        badge = productsIncart.length
-        // console.log(products)
-        // addToCart_badge.style.visibility = "visible"
-        // addToCart_badge.innerHTML = badge
-        productsIncart.map((item) => {
-            // console.log('productsInCart : ' + productsInCart)
-                shopping_basket.innerHTML += `<li>${item.title}</li>`
-                addToCart_badge.style.visibility = "visible"
-                addToCart_badge.innerHTML = badge
-                addItem = [...addItem,item]
-                //  convert object to string to set in localstorage
-                // JSON.stringify(addItem)
-                // localStorage.setItem('productsInCart', JSON.stringify(addItem))
-                // console.log(addItem)
-        })
-        
-    } else {
-        badge = 0
-        console.log('badge: ' + badge)
-    }
+if (productsInCartObj) {
+    badge = productsInCartObj.length
+    productsInCartObj.map((item) => {
+        shopping_basket.innerHTML += `<li>${item.title}</li>`
+        addToCart_badge.style.visibility = "visible"
+        addToCart_badge.innerHTML = badge
+        addItem = [...addItem, item]
+    })
+
+} else {
+    badge = 0
+    console.log('badge: ' + badge)
+}
 
 console.log('badge: ' + badge)
 
 // add product to cart
 function addToCart(id) {
     // products in cart at local storage
-    let productsInCart = localStorage.getItem('productsInCart')
+    // let producr= localStorage.getItem('productsInCart')
     console.log('products: ' + products.length)
-
-
     //search for product in local storage
     products.find((item) => {
         if (item.id == id) {
             console.log('item: ' + item)
-            console.log('productsInCart : ' + productsInCart)
+            // console.log('productsInCart : ' + productsInCart)
             shopping_basket.innerHTML += `<li>${item.title}</li>`
             badge += 1
             addToCart_badge.style.visibility = "visible"
             addToCart_badge.innerHTML = badge
-            addItem = [...addItem,item]
+            addItem = [...addItem, item]
             //  convert object to string to set in localstorage
             // JSON.stringify(addItem)
             localStorage.setItem('productsInCart', JSON.stringify(addItem))
@@ -114,6 +90,7 @@ function addToCart(id) {
     })
 
 }
+
 // addToCart_badge.style.visibility = "visible"
 bascket.addEventListener('click', showMenu)
 function showMenu() {

@@ -1,10 +1,18 @@
-let productsInCart = JSON.parse(localStorage.getItem('productsInCart'))
-let productDom = document.querySelector('.products')
-let user_info = document.querySelector("#user_info")
-// console.log("products: "+ JSON.stringify(productsInCart) )
-function drawProductsUi() {
+let productsInCart = localStorage.getItem('productsInCart')
+let productsInCartDom = document.querySelector('.productsInCart')
+let badge = 0
+
+//call function from user.js
+// check for user if open printed it on navbar
+ckeckForUser()
+if (productsInCart) {
+    // let items = JSON.parse(productsInCart)
+    drawProductsInCartUi(JSON.parse(productsInCart))
+}
+// function for drawproducts cart ui
+function drawProductsInCartUi(products) {
     // list of products
-    let productsUi = productsInCart.map(
+    let drawProductsInCartUi = products.map(
         (item) => {
             return `
             <div class="product-item">
@@ -24,20 +32,29 @@ function drawProductsUi() {
                 </div>
             `
         })
-    productDom.innerHTML = productsUi
+    productsInCartDom.innerHTML = drawProductsInCartUi
 }
-drawProductsUi()
-//function called from user js
-ckeckForUser()
-// console.log(products)
 
 
 // remove from localstorage
 function removeItemFromCart(id) {
+    if(productsInCart){
+        // let items = JSON.parse(productsInCart)
+        let items =productsInCart
+
+        let filtterdItems = items.filter((item)=>item.id !== id)
+        localStorage.setItem('productsInCart',JSON.stringify(filtterdItems))
+    }
+    location.reload() 
+}
+nbOfBadge()
+// nuber of badge
+function nbOfBadge() {
+    productsInCart = JSON.parse(productsInCart)
     productsInCart.map((item) => {
-        if (item.id != id) {
-            console.log(item)
-            productsInCart = localStorage.setItem("productsInCart", JSON.stringify(item))
-        }
-    })
+        badge++
+    }
+    )
+    console.log('number of badge :' + badge)
+
 }
