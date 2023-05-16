@@ -17,5 +17,5 @@ function ckeckForUser() {
             }, 1500);
         });
     }
-    console.log(username)
+    // console.log(username)
 }

@@ -1,11 +1,19 @@
 let productsInCart = localStorage.getItem('productsInCart')
 let productsInCartDom = document.querySelector('.productsInCart')
 let badge = 0
+let noProductsDom = document.querySelector('.noProducts')
+
+
+noProductsDom.style.visibility= 'hidden';
+if(JSON.parse(productsInCart).length == 0){
+    noProductsDom.style.visibility= 'visible';
+}
 
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
 if (productsInCart) {
+    
     // let items = JSON.parse(productsInCart)
     drawProductsInCartUi(JSON.parse(productsInCart))
 }
@@ -38,14 +46,16 @@ function drawProductsInCartUi(products) {
 
 // remove from localstorage
 function removeItemFromCart(id) {
-    if(productsInCart){
+    if (productsInCart) {
         // let items = JSON.parse(productsInCart)
-        let items =productsInCart
+        let items = productsInCart
+        // return the array contains the item At the expense of conditions 
+        let filtterdItems = items.filter((item) => item.id !== id)
 
-        let filtterdItems = items.filter((item)=>item.id !== id)
-        localStorage.setItem('productsInCart',JSON.stringify(filtterdItems))
+        localStorage.setItem('productsInCart', JSON.stringify(filtterdItems))
+        location.reload()
+
     }
-    location.reload() 
 }
 nbOfBadge()
 // nuber of badge
