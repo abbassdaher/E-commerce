@@ -154,6 +154,7 @@ header {
 .product-item-title {
     font-family: 'Oswald', sans-serif;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
 .product-item-desc {
@@ -213,4 +214,8 @@ header {
 }
 .cart_product{
     visibility: hidden;
+}
+/* for product Details */
+.productDeatail-form img{
+    width: 100%;
 }

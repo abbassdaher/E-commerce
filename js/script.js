@@ -3,7 +3,6 @@ let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
 
 let user_info = document.querySelector("#user_info")
-// let productsIncart = JSON.parse(localStorage.getItem('productsInCart'))
 let productsInCartObj = JSON.parse(localStorage.getItem('productsInCart'))
 let productsIncart = localStorage.getItem('productsInCart')
 let addItem = []
@@ -15,6 +14,7 @@ let addToCart_badge = document.querySelector('.badge')
 // var badge 
 let badge
 let cart_product_menu = document.querySelector('.cart_product')
+
 
 //call function from user.js
 // check for user if open printed it on navbar
@@ -30,7 +30,7 @@ function drawProductsUi() {
                     <img src="${item.image}" alt="image" class="product-item-img">
                     <div class="product-item-content">
                         <div class="product-item-info">
-                            <h2 class="product-item-title">${item.title}</h2>
+                            <h2 class="product-item-title" onclick='getID(${item.id})'>${item.title}</h2>
                             <p class="product-item-desc">lorem ipsum, dolor sit amet consestuer</p>
                             <span class="product-item-size">size: ${item.size}</span>
                         </div>
@@ -103,4 +103,9 @@ function showMenu() {
 
     }
 
+}
+// go to productDetails page and show all data for this product
+function getID(id) {
+    localStorage.setItem('choosedItemId', JSON.stringify(id))
+    window.location = "productDetails.html";
 }
