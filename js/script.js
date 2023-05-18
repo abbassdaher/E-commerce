@@ -20,9 +20,9 @@ let cart_product_menu = document.querySelector('.cart_product')
 // check for user if open printed it on navbar
 ckeckForUser()
 
+// 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 function drawProductsUi() {
     // list of products
-
     let productsUi = products.map(
         (item) => {
             return `
@@ -65,16 +65,13 @@ if (productsInCartObj) {
 
 console.log('badge: ' + badge)
 
+// 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // add product to cart
 function addToCart(id) {
-    // products in cart at local storage
-    // let producr= localStorage.getItem('productsInCart')
-    console.log('products: ' + products.length)
     //search for product in local storage
     products.find((item) => {
         if (item.id == id) {
             console.log('item: ' + item)
-            // console.log('productsInCart : ' + productsInCart)
             shopping_basket.innerHTML += `<li>${item.title}</li>`
             badge += 1
             addToCart_badge.style.visibility = "visible"
@@ -83,16 +80,15 @@ function addToCart(id) {
             //  convert object to string to set in localstorage
             // JSON.stringify(addItem)
             localStorage.setItem('productsInCart', JSON.stringify(addItem))
-            // console.log(addItem)
-
-
         }
     })
 
 }
 
-// addToCart_badge.style.visibility = "visible"
 bascket.addEventListener('click', showMenu)
+
+// 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
+// show the menu when click on the basket icon at header
 function showMenu() {
     if (cart_product_menu.style.visibility == "hidden") {
         if (shopping_basket.innerHTML != "") {
@@ -104,8 +100,31 @@ function showMenu() {
     }
 
 }
+// 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // go to productDetails page and show all data for this product
 function getID(id) {
     localStorage.setItem('choosedItemId', JSON.stringify(id))
     window.location = "productDetails.html";
+}
+// 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
+// search
+ let inputSearch = document.getElementById('search')
+
+
+ inputSearch.addEventListener('keyup',printEnter)
+
+ function printEnter(){
+    // keyCode of enter =13
+    // when enter clickup apply the condition
+    if(event.keyCode === 13){
+        search(inputSearch.value,products)
+    }
+    // console.log(inputSearch.value)
+ }
+//  search
+function search(title,data){
+    data.find((item)=>{
+    if(item.title == title)
+    console.log(item);
+})
 }

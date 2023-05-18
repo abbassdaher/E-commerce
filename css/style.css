@@ -87,6 +87,14 @@ header {
     opacity: 0.8
 }
 
+
+#search {
+    width: 100%;
+    border: 1px solid #cbc6c6;
+    border-radius: 5px;
+    height: 30px;
+    margin: 10px 0;
+}
 .products {
     width: 60%;
 }
