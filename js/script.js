@@ -108,23 +108,54 @@ function getID(id) {
 }
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // search
- let inputSearch = document.getElementById('search')
+let inputSearch = document.getElementById('search')
 
 
- inputSearch.addEventListener('keyup',printEnter)
+inputSearch.addEventListener('keyup', printEnter)
 
- function printEnter(){
+function printEnter() {
     // keyCode of enter =13
     // when enter clickup apply the condition
-    if(event.keyCode === 13){
-        search(inputSearch.value,products)
+    if (event.keyCode === 13) {
+        search(inputSearch.value, products)
     }
     // console.log(inputSearch.value)
- }
-//  search
-function search(title,data){
-    data.find((item)=>{
-    if(item.title == title)
-    console.log(item);
-})
 }
+//  search
+function search(title, data) {
+    let itemFilttred
+    let productFiltred
+    data.find((item) => {
+        if (item.title == title) {
+            productFiltred = item
+        }
+
+
+    })
+    if (productFiltred){
+        itemFilttred =
+            `
+            <div class="product-item">
+                    <img src="${productFiltred.image}" alt="image" class="product-item-img">
+                    <div class="product-item-content">
+                        <div class="product-item-info">
+                            <h2 class="product-item-title" onclick='getID(${productFiltred.id})'>${productFiltred.title}</h2>
+                            <p class="product-item-desc">lorem ipsum, dolor sit amet consestuer</p>
+                            <span class="product-item-size">size: ${productFiltred.size}</span>
+                        </div>
+                        <div class="product-item-actions">
+                            <button class="add-to-cart" onclick = "addToCart(${productFiltred.id})">add to cart</button>
+                            <i class="fa-sharp fa-regular fa-heart favorite"></i>
+                        </div>
+                    </div>
+                    
+                </div>
+            `
+        productDom.innerHTML = itemFilttred
+    } else {
+        console.log("no result");
+        drawProductsUi()
+    }
+
+}
+
