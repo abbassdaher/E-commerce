@@ -111,28 +111,44 @@ function getID(id) {
 let inputSearch = document.getElementById('search')
 
 
-inputSearch.addEventListener('keyup', printEnter)
+inputSearch.addEventListener('keyup', searchByName)
 
-function printEnter() {
+
+
+function searchByName() {
     // keyCode of enter =13
     // when enter clickup apply the condition
-    if (event.keyCode === 13) {
+        //  if (event.keyCode === 13) {
+        // search(inputSearch.value, products)
+        // }else{
+        //     search(inputSearch.value, products)
+        // }
+    // search when press any character
+    if (inputSearch.value !== "") {
         search(inputSearch.value, products)
+    } else {
+        drawProductsUi()
     }
-    // console.log(inputSearch.value)
+
 }
-//  search
 function search(title, data) {
     let itemFilttred
     let productFiltred
+    // search when write the fullname for product
+    // data.find((item) => {
+    //     if (item.title == title) {
+    //         productFiltred = item
+    //     }
     data.find((item) => {
-        if (item.title == title) {
+        // search by evrey character
+        if ((item.title).indexOf(title) == -1) {
+            console.log(item);
+
+        } else {
             productFiltred = item
         }
-
-
     })
-    if (productFiltred){
+    if (productFiltred) {
         itemFilttred =
             `
             <div class="product-item">
