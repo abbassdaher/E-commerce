@@ -227,3 +227,6 @@ header {
 .productDeatail-form img{
     width: 100%;
 }
+.cart_product_items{
+    display: flex;
+}

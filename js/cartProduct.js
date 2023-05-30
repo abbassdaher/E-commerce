@@ -30,6 +30,7 @@ function drawProductsInCartUi(products) {
                             <h2 class="product-item-title">${item.title}</h2>
                             <p class="product-item-desc">lorem ipsum, dolor sit amet consestuer</p>
                             <span class="product-item-size">size: ${item.size}</span>
+                            <div class="product-item-qty">quantity: ${item.qty}</div>
                         </div>
                         <div class="product-item-actions">
                             <button class="remove-from-cart" onclick = "removeItemFromCart(${item.id})">Remove</button>

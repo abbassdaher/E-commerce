@@ -8,7 +8,8 @@ let productsIncart = localStorage.getItem('productsInCart')
 let addItem = []
 
 let productDom = document.querySelector('.products')
-let shopping_basket = document.querySelector('.cart_product div')
+let shopping_basket = document.querySelector('.cart_product_item')
+let qty_cart_product = document.querySelector('.cart_product_item_badge')
 let bascket = document.querySelector('.bascket')
 let addToCart_badge = document.querySelector('.badge')
 // var badge 
@@ -67,22 +68,102 @@ console.log('badge: ' + badge)
 
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // add product to cart
+// function addToCart(id) {
+//     //search for product in local storage
+//     products.find((item) => {
+//         if (item.id == id) {
+//         chooseditem = item
+//              addItem.map((item)=>{
+//                 if(item.id == chooseditem.id){
+//                     console.log("item is duplicated");
+//                 }else{
+//                     shopping_basket.innerHTML += `<li>${item.title}</li>`
+//             // badge += 1
+//             addToCart_badge.style.visibility = "visible"
+//             addToCart_badge.innerHTML = badge
+//             // addItem = [...addItem, item]
+//             //  convert object to string to set in localstorage
+//             // JSON.stringify(addItem)
+//             localStorage.setItem('productsInCart', JSON.stringify(chooseditem))
+//                 }
+//             })
+
+
+//             shopping_basket.innerHTML += `<li>${item.title}</li>`
+//             badge += 1
+//             addToCart_badge.style.visibility = "visible"
+//             addToCart_badge.innerHTML = badge
+//             addItem = [...addItem, item]
+//             //  convert object to string to set in localstorage
+//             // JSON.stringify(addItem)
+//             localStorage.setItem('productsInCart', JSON.stringify(chooseditem))
+//         }
+//     })
+
+// }
+let allItems =[]
 function addToCart(id) {
-    //search for product in local storage
-    products.find((item) => {
-        if (item.id == id) {
-            console.log('item: ' + item)
-            shopping_basket.innerHTML += `<li>${item.title}</li>`
-            badge += 1
+    if(localStorage.getItem('username')){
+        let choosedItem = products.find((item) => item.id === id);
+        console.log('choosed item is : ' + JSON.stringify(choosedItem) );
+        let items = allItems.find((i)=> i.id === choosedItem.id)
+             badge += 1
             addToCart_badge.style.visibility = "visible"
             addToCart_badge.innerHTML = badge
-            addItem = [...addItem, item]
+            
             //  convert object to string to set in localstorage
             // JSON.stringify(addItem)
-            localStorage.setItem('productsInCart', JSON.stringify(addItem))
-        }
-    })
+            
 
+        
+        if(items){
+            choosedItem.qty++
+            // qty_cart_product.innerHTML = `<li>${choosedItem.qty}</li>`
+            console.log('add qty for'+ JSON.stringify(choosedItem));
+            
+        }else{
+            allItems.push(choosedItem)
+            console.log("items is : "+ JSON.stringify(items));
+        }
+        addItem = allItems
+        console.log(addItem);
+        localStorage.setItem('productsInCart', JSON.stringify(addItem) )
+        shopping_basket.innerHTML=""
+        allItems.forEach((item)=>shopping_basket.innerHTML += `<li>${item.title} ${item.qty}</li>`)
+        
+        
+
+    }
+   
+
+    // get item from database through the ID
+    // products.find((item) => {
+    //     if (item.id == id) {
+    //         addToCart_badge.style.visibility = "visible"
+    //         addItem = [...addItem, item]
+    //         console.log(addItem);
+    //         choosedItem.push(item)
+    //     }
+    // })
+
+    // addItem.map((item) => {
+    //     if (item.id !== choosedItem.id) {
+    //         shopping_basket.innerHTML += `<li>${item.title}</li>`
+    //         console.log("item is added");
+    //     }
+    // })
+    // cartItemDom(addItem,chosedItem)
+    // console.log(addItem);
+
+}
+// write title of item in cart product while item is not duplicated
+
+function cartItemDom(addItem,choosedItem){
+    addItem.find((item)=>{
+        choosedItem.find((i)=>{
+            if(item.id == i.id){}
+        })
+    })   
 }
 
 bascket.addEventListener('click', showMenu)
@@ -118,11 +199,11 @@ inputSearch.addEventListener('keyup', searchByName)
 function searchByName() {
     // keyCode of enter =13
     // when enter clickup apply the condition
-        //  if (event.keyCode === 13) {
-        // search(inputSearch.value, products)
-        // }else{
-        //     search(inputSearch.value, products)
-        // }
+    //  if (event.keyCode === 13) {
+    // search(inputSearch.value, products)
+    // }else{
+    //     search(inputSearch.value, products)
+    // }
     // search when press any character
     if (inputSearch.value !== "") {
         search(inputSearch.value, products)
@@ -140,7 +221,7 @@ function search(title, data) {
     //         productFiltred = item
     //     }
     data.find((item) => {
-        // search by evrey character
+        // search when entering every characters "instant search"💙
         if ((item.title).indexOf(title) == -1) {
             console.log(item);
 
