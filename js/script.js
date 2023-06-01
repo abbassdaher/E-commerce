@@ -37,7 +37,7 @@ function drawProductsUi() {
                         </div>
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
-                            <i class="fa-sharp fa-regular fa-heart favorite"></i>
+                            <i class="fa-sharp fa-regular fa-heart favorite" onclick = 'addToFavorite(${item.id})'></i>
                         </div>
                     </div>
                     
@@ -68,39 +68,6 @@ console.log('badge: ' + badge)
 
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // add product to cart
-// function addToCart(id) {
-//     //search for product in local storage
-//     products.find((item) => {
-//         if (item.id == id) {
-//         chooseditem = item
-//              addItem.map((item)=>{
-//                 if(item.id == chooseditem.id){
-//                     console.log("item is duplicated");
-//                 }else{
-//                     shopping_basket.innerHTML += `<li>${item.title}</li>`
-//             // badge += 1
-//             addToCart_badge.style.visibility = "visible"
-//             addToCart_badge.innerHTML = badge
-//             // addItem = [...addItem, item]
-//             //  convert object to string to set in localstorage
-//             // JSON.stringify(addItem)
-//             localStorage.setItem('productsInCart', JSON.stringify(chooseditem))
-//                 }
-//             })
-
-
-//             shopping_basket.innerHTML += `<li>${item.title}</li>`
-//             badge += 1
-//             addToCart_badge.style.visibility = "visible"
-//             addToCart_badge.innerHTML = badge
-//             addItem = [...addItem, item]
-//             //  convert object to string to set in localstorage
-//             // JSON.stringify(addItem)
-//             localStorage.setItem('productsInCart', JSON.stringify(chooseditem))
-//         }
-//     })
-
-// }
 let allItems =[]
 function addToCart(id) {
     if(localStorage.getItem('username')){
@@ -118,43 +85,16 @@ function addToCart(id) {
         
         if(items){
             choosedItem.qty++
-            // qty_cart_product.innerHTML = `<li>${choosedItem.qty}</li>`
-            console.log('add qty for'+ JSON.stringify(choosedItem));
-            
         }else{
             allItems.push(choosedItem)
-            console.log("items is : "+ JSON.stringify(items));
         }
         addItem = allItems
-        console.log(addItem);
         localStorage.setItem('productsInCart', JSON.stringify(addItem) )
         shopping_basket.innerHTML=""
         allItems.forEach((item)=>shopping_basket.innerHTML += `<li>${item.title} ${item.qty}</li>`)
-        
-        
-
+    }else{
+        window.location = "login.html"
     }
-   
-
-    // get item from database through the ID
-    // products.find((item) => {
-    //     if (item.id == id) {
-    //         addToCart_badge.style.visibility = "visible"
-    //         addItem = [...addItem, item]
-    //         console.log(addItem);
-    //         choosedItem.push(item)
-    //     }
-    // })
-
-    // addItem.map((item) => {
-    //     if (item.id !== choosedItem.id) {
-    //         shopping_basket.innerHTML += `<li>${item.title}</li>`
-    //         console.log("item is added");
-    //     }
-    // })
-    // cartItemDom(addItem,chosedItem)
-    // console.log(addItem);
-
 }
 // write title of item in cart product while item is not duplicated
 
@@ -242,7 +182,7 @@ function search(title, data) {
                         </div>
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${productFiltred.id})">add to cart</button>
-                            <i class="fa-sharp fa-regular fa-heart favorite"></i>
+                            <i class="fa-sharp fa-regular fa-heart favorite" onclick = 'addToFavorite(${productFiltred.id})'></i>
                         </div>
                     </div>
                     
@@ -255,4 +195,25 @@ function search(title, data) {
     }
 
 }
+// 💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙
 
+function favorite(){
+    console.log('favorited item');
+
+    
+}
+favoriteProduct = []
+function addToFavorite(id) {
+    if(localStorage.getItem('username')){
+        let choosedItem = products.find((item) => item.id === id);
+        favoriteProduct = [...favoriteProduct,choosedItem]
+        console.log('choosed item is favoriteProduct: ' + JSON.stringify(favoriteProduct) );
+        
+        localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct) )
+        // favoriteProduct.map((item) => console.log(item))
+    }else{
+        window.location = "login.html"
+    }
+    // favoriteProduct.map((i) => i.document.querySelector('.favorite').style.color ="red" ) 
+
+}

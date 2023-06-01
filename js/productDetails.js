@@ -22,7 +22,8 @@ function drawProductsDetails(id) {
                 <div class="container">
                     <img src="${item.image}" alt="watch">
                     <div class="desc">lorem ipsum, dolor sit amet consestuer</div>
-                    <div class="size">${item.size}</div>
+                    <div class="size">Size : ${item.size}</div>
+                    <div class="size">Quantity : ${item.qty}</div>
 
                 </div>
                 `
