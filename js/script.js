@@ -16,13 +16,15 @@ let addToCart_badge = document.querySelector('.badge')
 let badge
 let cart_product_menu = document.querySelector('.cart_product')
 let favoriteDom = document.querySelector('.favorite')
-let idForIconColor = localStorage.getItem('idForIconColor')
+
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
 console.log(productsInCartObj);
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 function drawProductsUi() {
+    let idForIconColor = localStorage.getItem('idForIconColor')
+
     // list of products
     let productsUi = products.map(
         (item) => {
@@ -37,7 +39,7 @@ function drawProductsUi() {
                         </div>
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
-                            <i class="fa-sharp fa-regular fa-heart favorite" style="color:${idForIconColor==item.id ? "red" : ""}"  onclick = 'addToFavorite(${item.id})'></i>
+                            <i class="fa-sharp fa-regular fa-heart favorite" style="color:${item.liked=='true' ? "red" : ""}"  onclick = 'addToFavorite(${item.id})'></i>
                             
                             </div>
                     </div>
@@ -205,16 +207,18 @@ function favorite(){
     
 }
 favoriteProduct = []
+
 function addToFavorite(id) {
     if(localStorage.getItem('username')){
         let choosedItem = products.find(
             (item) => item.id === id)
+            choosedItem.liked = 'true'
         console.log(choosedItem);
         favoriteProduct = [...favoriteProduct,choosedItem]
         console.log('choosed item is favoriteProduct: ' + JSON.stringify(favoriteProduct) );
         localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct) )
         // favoriteProduct.map((item) => console.log(item))
-        favoriteProduct.map((item) => console.log(item) ) 
+        products.map((item) => console.log(item) ) 
         setColor(id)
     }else{
         window.location = "login.html"
@@ -222,9 +226,13 @@ function addToFavorite(id) {
     
 
 }
-
+let favoriteProductColored =[]
 function setColor(id){
 console.log('set icon favorite color for ID: ' + id);
-localStorage.setItem('idForIconColor',id)
-location.reload()
+favoriteProductColored = [id]
+localStorage.setItem('idForIconColor',favoriteProductColored)
+
+drawProductsUi()
+// const myArray = favoriteProductColored.split(",");
+console.log("favoriteProductColored: "+ favoriteProductColored );
 }
