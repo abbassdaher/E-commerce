@@ -213,18 +213,18 @@ favoriteProduct = []
 let allFavoriteProdects = []
 function addToFavorite(id) {
     if (localStorage.getItem('username')) {
-        let choosedItem = products.find( (item) => item.id === id )
+        let choosedItem = products.find((item) => item.id === id)
         choosedItem.liked = 'true'
-        console.log(choosedItem);
-        favoriteProduct = [...favoriteProduct, choosedItem]
-        console.log('choosed item is favoriteProduct: ' + JSON.stringify(favoriteProduct));
+        // console.log(choosedItem);
+        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == choosedItem.id)
+
+        if (!checkfavoriteProduct) {
+            favoriteProduct.push(choosedItem)
+        }
+        favoriteProduct.map((p) => console.log(p))
         localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
-        // favoriteProduct.map((item) => console.log(item))
-        favoriteProduct.map((item) => console.log("favorite product: "+item))
         drawProductsUi()
     } else {
         window.location = "login.html"
     }
-
-
 }
