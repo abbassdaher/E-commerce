@@ -16,13 +16,13 @@ let addToCart_badge = document.querySelector('.badge')
 let badge
 let cart_product_menu = document.querySelector('.cart_product')
 let favoriteDom = document.querySelector('.favorite')
-
+let productsLocal = localStorage.getItem('products')
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
 console.log(productsInCartObj);
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
-function drawProductsUi() {
+function drawProductsUi(products) {
     let idForIconColor = localStorage.getItem('idForIconColor')
 
     // list of products
@@ -41,17 +41,16 @@ function drawProductsUi() {
                             <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
                             <i class="fa-sharp fa-regular fa-heart favorite" style="color:${item.liked == 'true' ? "red" : ""}"  onclick = 'addToFavorite(${item.id})'></i>
                             
-                            </div>
+                        </div>
                     </div>
-                    
                 </div>
             `
         })
-    productDom.innerHTML = productsUi
+    productDom.innerHTML = productsUi.join("")
 }
 // ${(idForIconColor) ? console.log("true"):console.log("false")}
 // list of products
-drawProductsUi();
+drawProductsUi((JSON.parse(productsLocal)) || products);
 
 // check if products in cart at localstorage 
 if (productsInCartObj) {
@@ -152,7 +151,7 @@ function searchByName() {
     if (inputSearch.value !== "") {
         search(inputSearch.value, products)
     } else {
-        drawProductsUi()
+        drawProductsUi((JSON.parse(productsLocal)) || products)
     }
 
 }
@@ -167,7 +166,7 @@ function search(title, data) {
     data.find((item) => {
         // search when entering every characters "instant search"💙
         if ((item.title).indexOf(title) == -1) {
-            console.log(item);
+            console.log(item) ;
 
         } else {
             productFiltred = item
@@ -198,7 +197,7 @@ function search(title, data) {
         productDom.innerHTML = itemFilttred
     } else {
         console.log("no result");
-        drawProductsUi()
+        drawProductsUi((JSON.parse(productsLocal)) || products)
     }
 
 }
@@ -209,22 +208,36 @@ function favorite() {
 
 
 }
-favoriteProduct = []
-let allFavoriteProdects = []
+let favoriteIcon = document.querySelector('.favoriteIcon')
+let favoriteProduct = []
+let productsInFavorite = localStorage.getItem('productsInFavorite')
 function addToFavorite(id) {
+    
     if (localStorage.getItem('username')) {
         let choosedItem = products.find((item) => item.id === id)
         choosedItem.liked = 'true'
-        // console.log(choosedItem);
-        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == choosedItem.id)
 
+        products.map((item)=>{
+            if (item.id == choosedItem.id)
+            item.liked = 'true'
+        })
+        localStorage.setItem('products',JSON.stringify (products));
+
+        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == choosedItem.id)
+            
+            if(productsInFavorite)console.log( "productsInFavorite: "+ productsInFavorite)
         if (!checkfavoriteProduct) {
             favoriteProduct.push(choosedItem)
+            favoriteIcon.style.color='red'
+            
+
         }
         favoriteProduct.map((p) => console.log(p))
         localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
-        drawProductsUi()
+        drawProductsUi((JSON.parse(productsLocal)) || products)
     } else {
         window.location = "login.html"
     }
 }
+// prees to favorite icon in the top off page to go favorite page
+favoriteIcon.addEventListener("click", function(){window.location = "favorite.html"} )

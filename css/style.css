@@ -137,6 +137,8 @@ header {
 .product-item-actions .favorite {
     margin-left: auto;
     cursor: pointer;
+
+    
 }
 
 .add-to-cart {
@@ -179,6 +181,14 @@ header {
     font-size: 20px;
     position: relative;
     cursor: pointer;
+}
+.favoriteIcon{
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+
+
 }
 
 .badge {

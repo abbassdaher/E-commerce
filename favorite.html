@@ -9,7 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap" rel="stylesheet">
-        <title>Shopping Cart | cart products</title>
+        <title>Shopping Cart | favorite products</title>
     </head>
     <body>
         <header>
@@ -17,14 +17,14 @@
                 <div class="header_content">
                     <a href="index.html" class="logo">Shopping Cart</a>
                     <nav>
-                        <ul id="links">
+                        <!-- <ul id="links">
                             <li>
                                 <a href="login.html"> Sign In</a>
                             </li>
                             <li>
                                 <a href="register.html">Sign Up</a>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul id="user_info">
                             <li>
                                 <a href="#" id="username"></a>
@@ -36,15 +36,13 @@
                     </div>
                 </div>
             </header>
-            <section class="cart-form">
-                <div class="container">
-                    <div class="productsInCart"></div>
-                </div>
-            </section>
-            <section class="noProducts">
-                <div >there is no items!!</div>
-            </section>
+            <div class="container">
+                <section class="productsFavorite-form"></section>
+            </div>
             <script src="js/user.js"></script>
-            <script src="js/cartProduct.js"></script>
+            <script src="js/favorite.js"></script>
+            <script src="js/data.js"></script>
+            <!-- <script src="js/data.js"></script> -->
+            <!-- <script src="js/cartProduct.js"></script> -->
         </body>
     </html>

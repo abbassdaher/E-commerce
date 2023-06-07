@@ -41,7 +41,7 @@ function drawProductsInCartUi(products) {
                 </div>
             `
         })
-    productsInCartDom.innerHTML = drawProductsInCartUi
+    productsInCartDom.innerHTML = drawProductsInCartUi.join("")
 }
 
 

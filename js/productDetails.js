@@ -33,7 +33,7 @@ function drawProductsDetails(id) {
         }
     )
     console.log(choosedItemId);
-    productDeatailDom.innerHTML = chooseditem
+    productDeatailDom.innerHTML = chooseditem.join("")
 }
 
 drawProductsDetails(choosedItemId)
