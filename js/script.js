@@ -3,9 +3,11 @@ let password = document.querySelector("#password");
 let signup_btn = document.querySelector("#btn_submit")
 
 let user_info = document.querySelector("#user_info")
-let productsInCartObj = JSON.parse(localStorage.getItem('productsInCart'))
+
 let productsIncart = localStorage.getItem('productsInCart')
-let addItem = []
+let productsInCartObj = JSON.parse(productsIncart)
+// let addItemDB =JSON.parse(localStorage.getItem('productsInCart')) 
+let allItems = []
 
 let productDom = document.querySelector('.products')
 let shopping_basket = document.querySelector('.cart_product_item')
@@ -20,7 +22,7 @@ let productsLocal = localStorage.getItem('products')
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
-console.log(productsInCartObj);
+
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 function drawProductsUi(products) {
     let idForIconColor = localStorage.getItem('idForIconColor')
@@ -47,67 +49,74 @@ function drawProductsUi(products) {
             `
         })
     productDom.innerHTML = productsUi.join("")
+
 }
 // ${(idForIconColor) ? console.log("true"):console.log("false")}
 // list of products
-drawProductsUi((JSON.parse(productsLocal)) || products);
+// drawProductsUi((JSON.parse(productsLocal)) || products);
+drawProductsUi((JSON.parse(productsIncart)) || (JSON.parse(productsLocal)));
 
-// check if products in cart at localstorage 
-if (productsInCartObj) {
-    badge = productsInCartObj.length
-    productsInCartObj.map((item) => {
-        shopping_basket.innerHTML += `<li>${item.title}</li>`
-        addToCart_badge.style.visibility = "visible"
-        addToCart_badge.innerHTML = badge
-        addItem = [...addItem, item]
-    })
 
-} else {
-    badge = 0
-    console.log('badge: ' + badge)
-}
 
-console.log('badge: ' + badge)
+
 
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 // add product to cart
-let allItems = []
+
+badge = 0
 function addToCart(id) {
+    allItems = productsInCartObj
     if (localStorage.getItem('username')) {
         let choosedItem = products.find((item) => item.id === id);
-        console.log('choosed item is : ' + JSON.stringify(choosedItem));
-        let items = allItems.find((i) => i.id === choosedItem.id)
+        // check proudect in cart
+        let isProductInCart = allItems.some((i) => i.id === choosedItem.id)
         badge += 1
         addToCart_badge.style.visibility = "visible"
         addToCart_badge.innerHTML = badge
-
         //  convert object to string to set in localstorage
         // JSON.stringify(addItem)
-
-
-
-        if (items) {
-            choosedItem.qty++
+        if (isProductInCart) {
+            allItems = allItems.map((p) => {
+                if (p.id == choosedItem.id) p.qty++
+                return p
+            })
         } else {
             allItems.push(choosedItem)
         }
-        addItem = allItems
-        localStorage.setItem('productsInCart', JSON.stringify(addItem))
         shopping_basket.innerHTML = ""
         allItems.forEach((item) => shopping_basket.innerHTML += `<li>${item.title} ${item.qty}</li>`)
+        localStorage.setItem('productsInCart', JSON.stringify(allItems))
     } else {
         window.location = "login.html"
     }
-}
-// write title of item in cart product while item is not duplicated
 
-function cartItemDom(addItem, choosedItem) {
-    addItem.find((item) => {
-        choosedItem.find((i) => {
-            if (item.id == i.id) { }
-        })
-    })
 }
+
+// check if products in cart at localstorage 
+if (productsInCartObj) {
+    // console.log(allItems);
+    addToCart_badge.style.visibility = "visible"
+    productsInCartObj.map((item) => {
+        badge += item.qty
+        shopping_basket.innerHTML += `<li>${item.title} ${item.qty}</li>`
+    })
+    addToCart_badge.innerHTML = badge
+} else {
+    // allItems.map((item)=>localStorage.setItem('productsInCart',item))
+    badge = 0
+    console.log('badge: ' + badge)
+}
+// save
+// localStorage.setItem('productsInCart', JSON.stringify(allItems))
+
+
+// write title of item in cart product while item is not duplicated
+// console.log(allItems);
+// function cartItemDom(addItem, choosedItem) {
+//     addItem.find((item) => {
+
+//     })
+// }
 
 bascket.addEventListener('click', showMenu)
 
@@ -166,7 +175,7 @@ function search(title, data) {
     data.find((item) => {
         // search when entering every characters "instant search"💙
         if ((item.title).indexOf(title) == -1) {
-            console.log(item) ;
+            console.log(item);
 
         } else {
             productFiltred = item
@@ -202,42 +211,38 @@ function search(title, data) {
 
 }
 // 💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙
-
-function favorite() {
-    console.log('favorited item');
-
-
-}
+// Favorite
 let favoriteIcon = document.querySelector('.favoriteIcon')
 let favoriteProduct = []
 let productsInFavorite = localStorage.getItem('productsInFavorite')
 function addToFavorite(id) {
-    
     if (localStorage.getItem('username')) {
-        let choosedItem = products.find((item) => item.id === id)
-        choosedItem.liked = 'true'
+        let favoriteItem = products.find((item) => item.id === id)
+        favoriteItem.liked = 'true'
+        products.map((item) => {
+            if (item.id == favoriteItem.id) {
+                item.liked = 'true'
+                drawProductsUi(products || (JSON.parse(productsLocal)))
 
-        products.map((item)=>{
-            if (item.id == choosedItem.id)
-            item.liked = 'true'
+            }
+            console.log("products with favorite product: " + item);
         })
-        localStorage.setItem('products',JSON.stringify (products));
-
-        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == choosedItem.id)
-            
-            if(productsInFavorite)console.log( "productsInFavorite: "+ productsInFavorite)
+        localStorage.setItem('products', JSON.stringify(products));
+        // change the color of favorite icon
+        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == favoriteItem.id)
         if (!checkfavoriteProduct) {
-            favoriteProduct.push(choosedItem)
-            favoriteIcon.style.color='red'
-            
+            favoriteProduct.push(favoriteItem)
+            favoriteIcon.style.color = 'red'
 
         }
         favoriteProduct.map((p) => console.log(p))
         localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
-        drawProductsUi((JSON.parse(productsLocal)) || products)
     } else {
         window.location = "login.html"
     }
 }
+// console.log(productsLocal);
+drawProductsUi((JSON.parse(productsLocal)) || products)
+
 // prees to favorite icon in the top off page to go favorite page
-favoriteIcon.addEventListener("click", function(){window.location = "favorite.html"} )
+favoriteIcon.addEventListener("click", function () { window.location = "favorite.html" })

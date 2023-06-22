@@ -29,3 +29,4 @@ let products = [
         qty:1
     }
 ];
+// localStorage.setItem('products',JSON.stringify(products) )
