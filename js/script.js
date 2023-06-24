@@ -19,6 +19,7 @@ let badge
 let cart_product_menu = document.querySelector('.cart_product')
 let favoriteDom = document.querySelector('.favorite')
 let productsLocal = localStorage.getItem('products')
+let productsLocalOBJ= JSON.parse(productsLocal)
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
@@ -215,34 +216,71 @@ function search(title, data) {
 let favoriteIcon = document.querySelector('.favoriteIcon')
 let favoriteProduct = []
 let productsInFavorite = localStorage.getItem('productsInFavorite')
+
+
+// function addToFavorite(id) {
+
+//     if (localStorage.getItem('username')) {
+//         let favoriteItem = products.find((item) => item.id === id)
+//         favoriteItem.liked = 'true'
+
+//         products.map((item) => {
+//             if (item.id == id) {
+//                 item.liked = 'true'
+//                 drawProductsUi(products || (JSON.parse(productsLocal)))
+
+//             }
+//         })
+//         localStorage.setItem('products', JSON.stringify(products));
+//         // change the color of favorite icon
+//         let checkfavoriteProduct = favoriteProduct.find((i) => i.id == id)
+//         if (!checkfavoriteProduct) {
+//             favoriteProduct.push(favoriteItem)
+//             favoriteIcon.style.color = 'red'
+
+//         }
+
+//         favoriteProduct.map((p) => console.log(p))
+//         localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
+//     } else {
+//         window.location = "login.html"
+//     }
+// }
+
+
+// console.log(productsLocal);
+
 function addToFavorite(id) {
     if (localStorage.getItem('username')) {
-        let favoriteItem = products.find((item) => item.id === id)
-        favoriteItem.liked = 'true'
-        products.map((item) => {
-            if (item.id == favoriteItem.id) {
-                item.liked = 'true'
-                drawProductsUi(products || (JSON.parse(productsLocal)))
-
-            }
-            console.log("products with favorite product: " + item);
-        })
-        localStorage.setItem('products', JSON.stringify(products));
-        // change the color of favorite icon
-        let checkfavoriteProduct = favoriteProduct.find((i) => i.id == favoriteItem.id)
-        if (!checkfavoriteProduct) {
-            favoriteProduct.push(favoriteItem)
-            favoriteIcon.style.color = 'red'
-
+        let choosedItem = products.find((item) => item.id == id)
+        let isfavoriteProducts = JSON.parse(productsLocal).some((p) => (p.id == choosedItem.id && choosedItem.liked == "true"))
+        console.log(isfavoriteProducts);
+        if(!isfavoriteProducts) {
+            choosedItem.liked='true'
+            favoriteProduct.push(choosedItem)
+            
+        }else{
+            choosedItem.liked=''
         }
-        favoriteProduct.map((p) => console.log(p))
-        localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
-    } else {
-        window.location = "login.html"
-    }
+        productsLocalOBJ = productsLocalOBJ.map((p)=>{
+            if(p.id == choosedItem.id) p=choosedItem
+            return p
+        })
+        localStorage.setItem('products',JSON.stringify(productsLocalOBJ))
+        drawProductsUi(productsLocalOBJ || products)
+        
+// console.log(productsLocalOBJ);
+
+
+    } else { window.location = "login.html" }
+
+
 }
-// console.log(productsLocal);
-drawProductsUi((JSON.parse(productsLocal)) || products)
+favoriteProduct = productsInCartObj.map((fav)=> fav.liked = "true")
+    console.log(favoriteProduct);
+
+drawProductsUi(productsLocalOBJ || products)
+console.log(productsLocal);
 
 // prees to favorite icon in the top off page to go favorite page
 favoriteIcon.addEventListener("click", function () { window.location = "favorite.html" })
