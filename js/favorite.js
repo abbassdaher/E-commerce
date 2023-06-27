@@ -1,6 +1,5 @@
 let favoriteProducts = JSON.parse(localStorage.getItem('productsInFavorite'))
 let favoriteProductsDom = document.querySelector('.productsFavorite-form')
-
 // function drawProductsUi() {
 //     let idForIconColor = localStorage.getItem('idForIconColor')
 
@@ -61,16 +60,39 @@ function drawProductsInCartUi(products) {
 
 
 // remove from localstorage
+// function removeItemFromFavorite(id) {
+//     if (favoriteProducts) {
+//         // let items = JSON.parse(productsInCart)
+//         let items = favoriteProducts
+//         // return the array contains the item At the expense of conditions 
+//         let filtterdItems = items.filter((item) => item.id !== id)
+//         localStorage.setItem('productsInFavorite', JSON.stringify(filtterdItems))
+        
+
+//     }
+//     favoriteProducts = JSON.parse(localStorage.getItem('productsInFavorite'))
+//     drawProductsInCartUi(favoriteProducts)
+// }
 function removeItemFromFavorite(id) {
+    products = JSON.parse(localStorage.getItem('products'))
+    // onclick on remove from favorite remove true in products at localdatabase
+    products = products.map((item)=>{
+        if(item.id == id)item.liked=''
+        return item
+    })
+    localStorage.setItem('products', JSON.stringify(products))
+    console.log(products);
+    // remove item from favorite products in localdatabase
     if (favoriteProducts) {
         // let items = JSON.parse(productsInCart)
         let items = favoriteProducts
         // return the array contains the item At the expense of conditions 
         let filtterdItems = items.filter((item) => item.id !== id)
-
         localStorage.setItem('productsInFavorite', JSON.stringify(filtterdItems))
-        location.reload()
+        
 
     }
+    favoriteProducts = JSON.parse(localStorage.getItem('productsInFavorite'))
+    drawProductsInCartUi(favoriteProducts)
 }
 drawProductsInCartUi(favoriteProducts)

@@ -258,7 +258,7 @@ function addToFavorite(id) {
         if(!isfavoriteProducts) {
             choosedItem.liked='true'
             favoriteProduct.push(choosedItem)
-            
+            localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
         }else{
             choosedItem.liked=''
         }
@@ -276,8 +276,8 @@ function addToFavorite(id) {
 
 
 }
-favoriteProduct = productsInCartObj.map((fav)=> fav.liked = "true")
-    console.log(favoriteProduct);
+// favoriteProduct = productsInCartObj.map((fav)=> fav.liked = "true")
+//     console.log(favoriteProduct);
 
 drawProductsUi(productsLocalOBJ || products)
 console.log(productsLocal);
