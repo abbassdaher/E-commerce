@@ -216,8 +216,10 @@ function search(title, data) {
 let favoriteIcon = document.querySelector('.favoriteIcon')
 let favoriteProduct = []
 let productsInFavorite = localStorage.getItem('productsInFavorite')
-
-
+// check if i have products in productsInFavorite 
+if(JSON.parse(productsInFavorite)!=''){
+    favoriteIcon.style.color = 'red' 
+}
 // function addToFavorite(id) {
 
 //     if (localStorage.getItem('username')) {
@@ -257,10 +259,17 @@ function addToFavorite(id) {
         console.log(isfavoriteProducts);
         if(!isfavoriteProducts) {
             choosedItem.liked='true'
+            favoriteIcon.style.color = 'red'
             favoriteProduct.push(choosedItem)
             localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
         }else{
-            choosedItem.liked=''
+            // toggle red to gray and remove from local storage
+            products = products.map((item)=>{
+                if(item.id == choosedItem.id)choosedItem.liked=''
+                return item
+            })
+            console.log(products);
+            // localStorage.setItem('products',products)
         }
         productsLocalOBJ = productsLocalOBJ.map((p)=>{
             if(p.id == choosedItem.id) p=choosedItem

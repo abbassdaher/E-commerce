@@ -87,7 +87,7 @@ function removeItemFromFavorite(id) {
         // let items = JSON.parse(productsInCart)
         let items = favoriteProducts
         // return the array contains the item At the expense of conditions 
-        let filtterdItems = items.filter((item) => item.id !== id)
+        let filtterdItems = favoriteProducts.filter((item) => item.id !== id)
         localStorage.setItem('productsInFavorite', JSON.stringify(filtterdItems))
         
 
