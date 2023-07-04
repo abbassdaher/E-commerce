@@ -19,7 +19,7 @@ let badge
 let cart_product_menu = document.querySelector('.cart_product')
 let favoriteDom = document.querySelector('.favorite')
 let productsLocal = localStorage.getItem('products')
-let productsLocalOBJ= JSON.parse(productsLocal)
+let productsLocalOBJ = JSON.parse(productsLocal)
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
@@ -217,8 +217,8 @@ let favoriteIcon = document.querySelector('.favoriteIcon')
 let favoriteProduct = []
 let productsInFavorite = localStorage.getItem('productsInFavorite')
 // check if i have products in productsInFavorite 
-if(JSON.parse(productsInFavorite)!=''){
-    favoriteIcon.style.color = 'red' 
+if (JSON.parse(productsInFavorite) != '') {
+    favoriteIcon.style.color = 'red'
 }
 // function addToFavorite(id) {
 
@@ -253,38 +253,48 @@ if(JSON.parse(productsInFavorite)!=''){
 // console.log(productsLocal);
 
 function addToFavorite(id) {
+    productsInFavorite = localStorage.getItem('productsInFavorite')
     if (localStorage.getItem('username')) {
         let choosedItem = products.find((item) => item.id == id)
         let isfavoriteProducts = JSON.parse(productsLocal).some((p) => (p.id == choosedItem.id && choosedItem.liked == "true"))
         console.log(isfavoriteProducts);
-        if(!isfavoriteProducts) {
-            choosedItem.liked='true'
+        if (!isfavoriteProducts) {
+            choosedItem.liked = 'true'
             favoriteIcon.style.color = 'red'
             favoriteProduct.push(choosedItem)
             localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
-        }else{
+        } else {
+            
             // toggle red to gray and remove from local storage
-            products = products.map((item)=>{
-                if(item.id == choosedItem.id)choosedItem.liked=''
+            products = products.map((item) => {
+                if (item.id == choosedItem.id) choosedItem.liked = ''
                 return item
             })
-            console.log(products);
-            // localStorage.setItem('products',products)
+            
+            // 
+            console.log(JSON.stringify(productsInFavorite));
+            productsInFavorite = (JSON.parse(productsInFavorite)).filter((item) => item.id !== choosedItem.id)
+            console.log("productsInFavorite: " + JSON.stringify(productsInFavorite));
+            localStorage.setItem('productsInFavorite', JSON.stringify(productsInFavorite))
         }
-        productsLocalOBJ = productsLocalOBJ.map((p)=>{
-            if(p.id == choosedItem.id) p=choosedItem
+        productsLocalOBJ = productsLocalOBJ.map((p) => {
+            if (p.id == choosedItem.id) p = choosedItem
             return p
         })
-        localStorage.setItem('products',JSON.stringify(productsLocalOBJ))
+        localStorage.setItem('products', JSON.stringify(productsLocalOBJ))
         drawProductsUi(productsLocalOBJ || products)
-        
-// console.log(productsLocalOBJ);
+
+        // console.log(productsLocalOBJ);
 
 
     } else { window.location = "login.html" }
 
 
 }
+function isDuplicateProduct(products,item){
+   let isDuplicate = products.some((i)=> i.id==item.id)
+   console.log("isDuplicate: "+ isDuplicate);
+} 
 // favoriteProduct = productsInCartObj.map((fav)=> fav.liked = "true")
 //     console.log(favoriteProduct);
 

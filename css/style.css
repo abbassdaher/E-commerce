@@ -240,3 +240,15 @@ header {
 .cart_product_items{
     display: flex;
 }
+/************************create product****************/
+
+.create-product-icon{
+    position: fixed;
+    color: rgb(55, 0, 255);
+    right: 15px;
+    bottom: 15px;
+    display: flex;
+}
+.create-product-icon:hover{
+    opacity: 0.8;
+}

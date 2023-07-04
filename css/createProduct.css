@@ -1,0 +1,13 @@
+.section-create-product{
+    display: flex;
+}
+
+.section-create-product form{
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-between;
+
+}
+.product-size{
+
+}

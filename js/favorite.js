@@ -32,6 +32,7 @@ let favoriteProductsDom = document.querySelector('.productsFavorite-form')
 // function for drawproducts cart ui
 function drawProductsInCartUi(products) {
     // list of products
+    if(favoriteProducts){
     let drawProductsInCartUi = products.map(
         (item) => {
             return `
@@ -56,7 +57,7 @@ function drawProductsInCartUi(products) {
             `
         })
     favoriteProductsDom.innerHTML = drawProductsInCartUi.join("")
-}
+}}
 
 
 // remove from localstorage
