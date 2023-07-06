@@ -25,10 +25,18 @@ let productsLocalOBJ = JSON.parse(productsLocal)
 ckeckForUser()
 
 // 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
+/**
+ * The function `drawProductsUi` takes an array of products and generates HTML elements to display each
+ * product's information, including an image, title, description, size, and buttons for adding to cart
+ * and adding to favorites.
+ * @param products - An array of objects representing different products. Each object should have the
+ * following properties:
+ */
 function drawProductsUi(products) {
     let idForIconColor = localStorage.getItem('idForIconColor')
 
     // list of products
+console.log(products);
     let productsUi = products.map(
         (item) => {
             return `
@@ -37,7 +45,7 @@ function drawProductsUi(products) {
                     <div class="product-item-content">
                         <div class="product-item-info">
                             <h2 class="product-item-title" onclick='getID(${item.id})'>${item.title}</h2>
-                            <p class="product-item-desc">lorem ipsum, dolor sit amet consestuer</p>
+                            <p class="product-item-desc">${item.description}</p>
                             <span class="product-item-size">size: ${item.size}</span>
                         </div>
                         <div class="product-item-actions">
@@ -49,7 +57,7 @@ function drawProductsUi(products) {
                 </div>
             `
         })
-    productDom.innerHTML = productsUi.join("")
+     productDom.innerHTML = productsUi.join("")
 
 }
 // ${(idForIconColor) ? console.log("true"):console.log("false")}
@@ -66,7 +74,8 @@ drawProductsUi((JSON.parse(productsIncart)) || (JSON.parse(productsLocal)));
 
 badge = 0
 function addToCart(id) {
-    allItems = productsInCartObj
+    allItems = productsInCartObj ? productsInCartObj : []
+    // allItems = productsInCartObj
     if (localStorage.getItem('username')) {
         let choosedItem = products.find((item) => item.id === id);
         // check proudect in cart
@@ -196,8 +205,6 @@ function search(title, data) {
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${productFiltred.id})">add to cart</button>
                             <i class="fa-sharp fa-regular fa-heart favorite" style="color:${productFiltred.liked == 'true' ? "red" : ""}"  onclick = 'addToFavorite(${productFiltred.id})'></i>
-
-                             
                         </div>
                     </div>
                     
@@ -264,13 +271,13 @@ function addToFavorite(id) {
             favoriteProduct.push(choosedItem)
             localStorage.setItem('productsInFavorite', JSON.stringify(favoriteProduct))
         } else {
-            
+
             // toggle red to gray and remove from local storage
             products = products.map((item) => {
                 if (item.id == choosedItem.id) choosedItem.liked = ''
                 return item
             })
-            
+
             // 
             console.log(JSON.stringify(productsInFavorite));
             productsInFavorite = (JSON.parse(productsInFavorite)).filter((item) => item.id !== choosedItem.id)
@@ -291,10 +298,10 @@ function addToFavorite(id) {
 
 
 }
-function isDuplicateProduct(products,item){
-   let isDuplicate = products.some((i)=> i.id==item.id)
-   console.log("isDuplicate: "+ isDuplicate);
-} 
+function isDuplicateProduct(products, item) {
+    let isDuplicate = products.some((i) => i.id == item.id)
+    console.log("isDuplicate: " + isDuplicate);
+}
 // favoriteProduct = productsInCartObj.map((fav)=> fav.liked = "true")
 //     console.log(favoriteProduct);
 

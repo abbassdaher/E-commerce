@@ -1,13 +1,22 @@
-.section-create-product{
-    display: flex;
+.section-create-product input{
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 10px;
 }
 
-.section-create-product form{
-    flex-direction: column;
-    width: 50%;
-    justify-content: space-between;
-
+.section-create-product select{
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 10px;
+    color: gray;
+    text-transform: capitalize;
 }
-.product-size{
-
+.section-create-product input[type=submit]{
+    text-transform: capitalize;
+    border: none ;
+    cursor: pointer;
+    background-color: #5c5cec;
+    color: white;
 }

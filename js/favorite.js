@@ -41,7 +41,7 @@ function drawProductsInCartUi(products) {
                     <div class="product-item-content">
                         <div class="product-item-info">
                             <h2 class="product-item-title">${item.title}</h2>
-                            <p class="product-item-desc">lorem ipsum, dolor sit amet consestuer</p>
+                            <p class="product-item-desc">${item.description}</p>
                             <span class="product-item-size">size: ${item.size}</span>
                             <div class="product-item-qty">quantity: ${item.qty}</div>
                         </div>
