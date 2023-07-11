@@ -55,6 +55,7 @@ function createProduct(e) {
  */
 function setImage() {
     let file = this.files[0]
+    convertImageBase64(file)
     console.log(file);
     let type = file.type
     if (type !== "image/jpeg") {
@@ -68,4 +69,16 @@ function setImage() {
     imageUrl = URL.createObjectURL(file)
     
 
+}
+/**
+ * The function `convertImageBase64` converts an image file to a base64 encoded string using
+ * JavaScript.
+ * @param file - The `file` parameter is the image file that you want to convert to base64.
+ */
+function convertImageBase64(file){
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = function () {
+        imageUrl = reader.result ;
+    }
 }
