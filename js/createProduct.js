@@ -3,12 +3,15 @@ let productDescription = document.querySelector('.product-description')
 let productSize = document.querySelector('.product-size')
 let SubmitButtom = document.querySelector('.SubmitButtom')
 let productSizeValue;
-let allproducts = localStorage.getItem('product')
+let allproducts = localStorage.getItem('products')
+let uploadedImage = document.querySelector('.upload-image')
+let imageUrl 
 
 ckeckForUser()
 // event
 productSize.addEventListener('change', getProductSizeValue)
 SubmitButtom.addEventListener('click', createProduct)
+uploadedImage.addEventListener('change', setImage)
 
 // function
 /**
@@ -23,15 +26,46 @@ function getProductSizeValue() {
 entered by the user in the form. */
 function createProduct(e) {
     e.preventDefault()
-    let obj = {
-    id: JSON.parse(allproducts).length + 1,
-    image: "",
-    title: productTitle.value,
-    size: productSizeValue,
-    qty: 1,
-    description: productDescription.value,
-    };
-    let newProduct = {...(JSON.parse(allproducts)),obj}
-    localStorage.setItem('newprodect',JSON.stringify(newProducts) )
-    // console.log(newProduct);
+    let namevalue = productTitle.value
+    let productDescriptionvalue = productDescription.value
+    if (namevalue && productDescription) {
+        let obj = {
+            id: (JSON.parse(allproducts)).length + 1,
+            image: imageUrl,
+            title: productTitle.value,
+            size: productSizeValue,
+            qty: 1,
+            description: productDescription.value,
+        };
+        let newProduct = [...(JSON.parse(allproducts)), obj]
+        localStorage.setItem('products', JSON.stringify(newProduct))
+        console.log(newProduct);
+        productTitle.value = ""
+        productSizeValue = ""
+        productDescription.value = ""
+    } else {
+        alert('Please Fill The Form')
+    }
+}
+
+/**
+ * The function `setImage()` is used to handle the selection of an image file and display it on the
+ * webpage if it is a JPEG image.
+ * @returns The function does not explicitly return anything.
+ */
+function setImage() {
+    let file = this.files[0]
+    console.log(file);
+    let type = file.type
+    if (type !== "image/jpeg") {
+        alert("the file is not supported")
+        return
+    }
+    // if (file.size > 5 * 1024) {
+    //     alert("the file is to large")
+    //     return
+    // }
+    imageUrl = URL.createObjectURL(file)
+    
+
 }

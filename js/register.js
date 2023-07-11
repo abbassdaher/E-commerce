@@ -23,6 +23,7 @@ signup_btn.addEventListener("click", setData)
 // window.location = "index.html"
 
 
+
 function setData() {
     if (username.value == '' || email.value == '' || password.value == '') {
         alert("please fill the form");
