@@ -78,7 +78,7 @@ function addToCart(id) {
     allItems = productsInCartObj ? productsInCartObj : []
     // allItems = productsInCartObj
     if (localStorage.getItem('username')) {
-        let choosedItem = products.find((item) => item.id === id);
+        let choosedItem = products.find((item) => item.id === id) || JSON.parse(productsLocal).find((item) => item.id == id);
         // check proudect in cart
         let isProductInCart = allItems.some((i) => i.id === choosedItem.id)
         badge += 1
@@ -261,9 +261,11 @@ if (JSON.parse(productsInFavorite) != '') {
 // console.log(productsLocal);
 
 function addToFavorite(id) {
-    productsInFavorite = localStorage.getItem('productsInFavorite')
+    let productsInFavorite = localStorage.getItem('productsInFavorite')
     if (localStorage.getItem('username')) {
-        let choosedItem = products.find((item) => item.id == id)
+        let productsLocal = localStorage.getItem('products')
+        console.log(productsLocal);
+        let choosedItem = products.find((item) => item.id == id) || JSON.parse(productsLocal).find((item) => item.id == id)
         let isfavoriteProducts = JSON.parse(productsLocal).some((p) => (p.id == choosedItem.id && choosedItem.liked == "true"))
         console.log(isfavoriteProducts);
         if (!isfavoriteProducts) {
