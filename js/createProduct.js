@@ -43,6 +43,7 @@ function createProduct(e) {
         productTitle.value = ""
         productSizeValue = ""
         productDescription.value = ""
+        window.location = "index.html"
     } else {
         alert('Please Fill The Form')
     }

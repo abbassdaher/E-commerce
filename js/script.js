@@ -313,3 +313,27 @@ console.log(productsLocal);
 
 // prees to favorite icon in the top off page to go favorite page
 favoriteIcon.addEventListener("click", function () { window.location = "favorite.html" })
+
+
+// Filtter by size
+let filtterSize = document.querySelector('.filtter-size')
+filtterSize.addEventListener('change' , fillterProductBySize )
+
+/**
+ * The function filters products based on size and updates the UI accordingly.
+ * @param e - The parameter "e" is an event object that represents the event that triggered the
+ * function. In this case, it is likely an event object from a user interacting with a dropdown menu or
+ * input field.
+ */
+function fillterProductBySize(e){
+    let size = e.target.value
+    let products = productsLocalOBJ
+    if(size==="all"){
+        drawProductsUi(products)
+    }else{
+        products = products.filter((item)=>item.size===size)
+        drawProductsUi(products)
+
+    }
+
+}

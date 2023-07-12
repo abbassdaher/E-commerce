@@ -97,6 +97,18 @@ header {
 }
 .products {
     width: 60%;
+    float: left;
+}
+.filterProduct{
+    width: 35%;
+    float: right;
+    margin: auto;
+    margin-top: 10px;
+    
+}
+.filtter-size{
+    display: block;
+    width: 100%;
 }
 
 .product-item {
