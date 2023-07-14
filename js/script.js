@@ -347,6 +347,11 @@ function editProduct(id){
 localStorage.setItem('idForEditProduct',JSON.stringify(idForEditProduct))
 window.location = 'editProduct.html'
 }
+/**
+ * The `deleteProduct` function removes a product from the local storage and updates the user
+ * interface.
+ * @param id - The `id` parameter is the unique identifier of the product that needs to be deleted.
+ */
 function deleteProduct(id){
     productsLocal = JSON.parse(productsLocal).filter((item)=>item.id!==id)
     localStorage.setItem('products',JSON.stringify(productsLocal))
