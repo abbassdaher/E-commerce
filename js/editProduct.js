@@ -116,6 +116,14 @@ function editProductDesc() {
     console.log(editProduct.title);
 }
 
+/**
+ * The EditProduct function is used to update a product's information and store it in the local
+ * storage.
+ * @param e - The parameter "e" is an event object that is passed to the function when it is triggered
+ * by an event. It is commonly used to prevent the default behavior of an event, such as submitting a
+ * form or following a link. In this case, the function is preventing the default form submission
+ * behavior using
+ */
 function EditProduct(e) {
     e.preventDefault()
     let namevalue = productTitle.value
