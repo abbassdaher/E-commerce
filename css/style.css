@@ -185,10 +185,20 @@ header {
 
 .editProduct{
     width: 30%;
-    display: block;
+    /* display: block; */
     background-color: green;
     color: white;
+    /* float: left; */
 }
+
+.deleteProduct{
+    width: 30%;
+    /* display: block; */
+    background-color: red;
+    color: white;
+    /* float: right; */
+}
+
 
 .bascket {
     color: white;

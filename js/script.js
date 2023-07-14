@@ -46,8 +46,10 @@ function drawProductsUi(products) {
                         <div class="product-item-info">
                             <h2 class="product-item-title" onclick='getID(${item.id})'>${item.title}</h2>
                             <p class="product-item-desc">${item.description}</p>
-                            <span class="product-item-size">size: ${item.size}</span>
+                            <div class="product-item-size">size: ${item.size}</div>
                             ${ item.itsMe == 'yes' && "<button class ='editProduct' onclick = 'editProduct(" + item.id + ")'>Edit</button>"}
+                            ${ item.itsMe == 'yes' && "<button class ='deleteProduct' onclick = 'deleteProduct(" + item.id + ")'>Delete</button>"}
+
                         </div>
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
@@ -344,4 +346,9 @@ function editProduct(id){
     let idForEditProduct = id
 localStorage.setItem('idForEditProduct',JSON.stringify(idForEditProduct))
 window.location = 'editProduct.html'
+}
+function deleteProduct(id){
+    productsLocal = JSON.parse(productsLocal).filter((item)=>item.id!==id)
+    localStorage.setItem('products',JSON.stringify(productsLocal))
+    drawProductsUi(productsLocal)
 }
