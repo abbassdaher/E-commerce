@@ -5,7 +5,8 @@ let products = [
         title:"hedphone item",
         size:"large",
         qty:1,
-        description: "lorem ipsum, dolor sit amet consestuer"
+        description: "lorem ipsum, dolor sit amet consestuer",
+        itsMe:'no'
 
     },
     { 
@@ -14,7 +15,8 @@ let products = [
         title:"glasses item",
         size:"small",
         qty:1,
-        description: "lorem ipsum, dolor sit amet consestuer"
+        description: "lorem ipsum, dolor sit amet consestuer",
+        itsMe:'no'
     },
     {   
         id:3,
@@ -22,15 +24,17 @@ let products = [
         title:"lap item",
         size:"large",
         qty:1,
-        description: "lorem ipsum, dolor sit amet consestuer"
+        description: "lorem ipsum, dolor sit amet consestuer",
+        itsMe:'no'
     },
     {   
         id:4,
         image:"images/watch.jpg",
         title:"watch item",
-        size:"meduim",
+        size:"medium",
         qty:1,
-        description: "lorem ipsum, dolor sit amet consestuer"
+        description: "lorem ipsum, dolor sit amet consestuer",
+        itsMe:'no'
     }
 ];
-// localStorage.setItem('products',JSON.stringify(products) )
+// localStorage.setItem('products',JSON.stringify(products))

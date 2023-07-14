@@ -36,17 +36,18 @@ function drawProductsUi(products) {
     let idForIconColor = localStorage.getItem('idForIconColor')
 
     // list of products
-console.log(products);
+    console.log(products);
     let productsUi = products.map(
         (item) => {
             return `
-            <div class="product-item">
+            <div class="product-item" style = ' border: ${item.itsMe == 'yes' ? ' 1px solid green' : ''}'>
                     <img src="${item.image}" alt="image" class="product-item-img">
                     <div class="product-item-content">
                         <div class="product-item-info">
                             <h2 class="product-item-title" onclick='getID(${item.id})'>${item.title}</h2>
                             <p class="product-item-desc">${item.description}</p>
                             <span class="product-item-size">size: ${item.size}</span>
+                            ${ item.itsMe == 'yes' && "<button class ='editProduct' onclick = 'editProduct(" + item.id + ")'>Edit</button>"}
                         </div>
                         <div class="product-item-actions">
                             <button class="add-to-cart" onclick = "addToCart(${item.id})">add to cart</button>
@@ -57,7 +58,7 @@ console.log(products);
                 </div>
             `
         })
-     productDom.innerHTML = productsUi.join("")
+    productDom.innerHTML = productsUi.join("")
 
 }
 // ${(idForIconColor) ? console.log("true"):console.log("false")}
@@ -317,7 +318,7 @@ favoriteIcon.addEventListener("click", function () { window.location = "favorite
 
 // Filtter by size
 let filtterSize = document.querySelector('.filtter-size')
-filtterSize.addEventListener('change' , fillterProductBySize )
+filtterSize.addEventListener('change', fillterProductBySize)
 
 /**
  * The function filters products based on size and updates the UI accordingly.
@@ -325,15 +326,22 @@ filtterSize.addEventListener('change' , fillterProductBySize )
  * function. In this case, it is likely an event object from a user interacting with a dropdown menu or
  * input field.
  */
-function fillterProductBySize(e){
+function fillterProductBySize(e) {
     let size = e.target.value
     let products = productsLocalOBJ
-    if(size==="all"){
+    if (size === "all") {
         drawProductsUi(products)
-    }else{
-        products = products.filter((item)=>item.size===size)
+    } else {
+        products = products.filter((item) => item.size === size)
         drawProductsUi(products)
 
     }
 
+}
+
+// edit product
+function editProduct(id){
+    let idForEditProduct = id
+localStorage.setItem('idForEditProduct',JSON.stringify(idForEditProduct))
+window.location = 'editProduct.html'
 }

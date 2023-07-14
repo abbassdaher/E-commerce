@@ -36,6 +36,7 @@ function createProduct(e) {
             size: productSizeValue,
             qty: 1,
             description: productDescription.value,
+            itsMe:'yes'
         };
         let newProduct = [...(JSON.parse(allproducts)), obj]
         localStorage.setItem('products', JSON.stringify(newProduct))

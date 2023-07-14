@@ -183,6 +183,13 @@ header {
     font-size: 15px;
 }
 
+.editProduct{
+    width: 30%;
+    display: block;
+    background-color: green;
+    color: white;
+}
+
 .bascket {
     color: white;
     margin: 0 5px;

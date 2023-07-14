@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/createProduct.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Index</title>
+    <title>Shopping Cart | Edit products</title>
 </head>
 
 <body>
@@ -52,28 +53,27 @@
         </div>
     </header>
 
-    <section class="section-home">
+    <section class="section-create-product">
         <div class="container">
-            <input type="text" id="search" placeholder="Search by name...">
-            <div class="products"></div>
-            <div class="filterProduct">
-                <select name="" class="filtter-size">
-                    <option value=""hidden>size of product</option>
-                    <option value="all">All</option>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
+            <form action="">
+                <input type="file" class="upload-image">
+                <input type="text" placeholder="Title.." class="product-title">
+                <input type="text" placeholder="Description.." class="product-description">
+                <select name="" id="" class="product-size">
+                    <option hidden>select size</option>
+                    <option value="small">small</option>
+                    <option value="medium">medium</option>
+                    <option value="large">large</option>
                 </select>
-            </div>
+                <input type="submit" value="Edit product" class="SubmitButtom">
+            </form>
         </div>
-        <a href="createProduct.html" class="create-product">
-            <i class="fa fa-plus-circle fa-2x create-product-icon"></i>
-        </a>
         
     </section>
     <script src="js/user.js"></script>
+    <script src="js/editProduct.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
 
 </body>
 
