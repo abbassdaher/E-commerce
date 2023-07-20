@@ -277,3 +277,18 @@ header {
 .create-product-icon:hover{
     opacity: 0.8;
 }
+
+.noProducts{
+    text-align: center;
+}
+
+/* profile */
+.profile-avatar{
+    width:150px;
+    height: 15 0px;
+    border-radius: 50%;
+    margin-top: 10%;
+}
+.profile-form{
+    margin-bottom: 5%;
+}
