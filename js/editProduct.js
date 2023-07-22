@@ -160,7 +160,6 @@ function updateImage() {
         alert("the file is not supported")
         return
     }
-
     imageUrl = URL.createObjectURL(file)
 
 

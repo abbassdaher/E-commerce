@@ -1,4 +1,7 @@
 let products = JSON.parse(localStorage.getItem('products')) 
+let profileAvatarUploded = localStorage.getItem('profileImage') 
+console.log(profileAvatarUploded);
+
 console.log(products);
 let myproducts = products.filter((item)=> item.itsMe == "yes" )
 let userName = localStorage.getItem('username')
@@ -13,7 +16,7 @@ ckeckForUser()
 
 profileUsernameDom.innerHTML = userName
 profileEmailDom.innerHTML = email
-profileAvatarDom.src = "images/user_avatar.jpg"
+profileAvatarDom.src = profileAvatarUploded
 productLength.innerHTML = 'number of my product: '+ myproducts.length
 
 console.log(myproducts)

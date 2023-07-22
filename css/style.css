@@ -286,9 +286,20 @@ header {
 .profile-avatar{
     width:150px;
     height: 15 0px;
-    border-radius: 50%;
     margin-top: 10%;
+    border-radius: 50%;
 }
 .profile-form{
     margin-bottom: 5%;
+}
+.edit-my-profile{
+    display: block;
+    width: 15%;
+    text-align: center;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 10px;
+    text-transform: capitalize;
+    cursor: pointer;
 }
