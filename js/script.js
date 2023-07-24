@@ -20,6 +20,8 @@ let cart_product_menu = document.querySelector('.cart_product')
 let favoriteDom = document.querySelector('.favorite')
 let productsLocal = localStorage.getItem('products')
 let productsLocalOBJ = JSON.parse(productsLocal)
+let lang = localStorage.getItem('lang')
+changeLang(lang)
 //call function from user.js
 // check for user if open printed it on navbar
 ckeckForUser()
@@ -356,4 +358,16 @@ function deleteProduct(id){
     productsLocal = JSON.parse(productsLocal).filter((item)=>item.id!==id)
     localStorage.setItem('products',JSON.stringify(productsLocal))
     drawProductsUi(productsLocal)
+}
+
+// rtl & ltr
+let langEN = document.querySelector('.lang-en')
+let langAR = document.querySelector('.lang-ar')
+
+langAR.addEventListener("click", ()=>changeLang("rtl"))
+langEN.addEventListener("click", ()=>changeLang("ltr"))
+
+function changeLang(dir){
+    document.documentElement.setAttribute("dir",dir)
+    localStorage.setItem('lang',dir)
 }

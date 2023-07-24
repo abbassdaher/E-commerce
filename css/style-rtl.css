@@ -1,0 +1,33 @@
+[dir="rtl"] .products{
+    float: right;
+}
+[dir="rtl"] .filterProduct {
+    float: left;
+}
+[dir="rtl"] .product-item-content{
+    padding: 0;
+}
+[dir="rtl"]  .product-item-info{
+    margin-right: 4%;
+}
+[dir="rtl"]  .product-item-actions{
+    align-items: end;
+    
+}
+[dir="rtl"] .favorite {
+    margin-left: 0;
+}
+.lang-en{
+    color: white;
+    /* display: block; */
+    margin-right: 5px;
+    cursor: pointer;
+}
+[dir="rtl"] .lang-ar{
+    margin-right: 5px;
+}
+.lang-ar{
+    color: white;
+    cursor: pointer;
+
+}
